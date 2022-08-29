@@ -1,10 +1,8 @@
-import express from "express";
-const router = express.Router();
+export const register = (req, res) => {
+    res.json({ ok: "true" });
+}
 
-router.post("/login", (req, res) => {
-    res.json({ ok: true });
-});
+export const login = (req, res) => {
+    res.json({ ok: "Login" });
+};
 
-
-
-export default router;
