@@ -35,6 +35,6 @@ export const tokenVerificationErrors = {
     "invalid token": "Token no válido",
     "No Bearer": "Utiliza formato Bearer",
     "jwt malformed": "JWT formato no válido"
-}
+};
 
 

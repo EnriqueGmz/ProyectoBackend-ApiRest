@@ -1,7 +1,7 @@
 import express from "express";
 import { infoUser, login, logout, refreshToken, register } from "../controllers/auth.controller.js";
-import { body } from "express-validator";
-import { validationResultExpress } from "../middlewares/ValidationResultExpress.js";
+// import { body } from "express-validator";
+// import { validationResultExpress } from "../middlewares/ValidationResultExpress.js";
 import { requireToken } from "../middlewares/requireToken.js";
 import { requireRefreshToken } from "../middlewares/requireRefreshToken.js";
 import { bodyLoginValidator, bodyRegisterValidator } from "../middlewares/validatorManager.js";

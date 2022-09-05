@@ -1,10 +1,11 @@
 import jwt from "jsonwebtoken";
+import { tokenVerificationErrors } from "../utils/tokenManager.js";
 
 export const requireToken = (req, res, next) => {
     try {
         let token = req.headers?.authorization;
         if (!token)
-            throw new Error("No existe el token en el header usa Bearer");
+            throw new Error("Utiliza formato Bearer");
 
         token = token.split(" ")[1];
 
@@ -15,11 +16,11 @@ export const requireToken = (req, res, next) => {
     } catch (error) {
         console.log(error.message);
 
+        if (error) {
+            return res.status(401).json({ error: error.message });
+        }
         return res
             .status(401)
             .send({ error: tokenVerificationErrors[error.message] });
-
-        // return res.status(401).json({ error: error.message });
-
     }
-}
+};

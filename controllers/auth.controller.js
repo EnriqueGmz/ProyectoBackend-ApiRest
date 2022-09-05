@@ -50,8 +50,15 @@ export const login = async (req, res) => {
         return res.json({ token, expiresIn });
     } catch (error) {
         // console.log(error);
+        const tokenVerificationErrors = {
+            "invalid signature": "la firma del JWT no es válida",
+            "jwt expired": "JWT expirado",
+            "invalid token": "Token no válido",
+            "No Bearer": "Utiliza formato Bearer",
+            "jwt malformed": "JWT formato no válido"
+        };
         if (error) {
-            return res.status(403).json({ error: error.message });
+            return res.status(403).json({ error: tokenVerificationErrors });
         }
         return res.status(500).json({ error: "Error del servidor" });
     }
