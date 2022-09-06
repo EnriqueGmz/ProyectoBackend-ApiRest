@@ -1,4 +1,5 @@
-import { body, validationResult } from "express-validator";
+import { body, param, validationResult } from "express-validator";
+import axios from "axios";
 
 export const validationResultExpress = (req, res, next) => {
     const errors = validationResult(req);
@@ -9,6 +10,35 @@ export const validationResultExpress = (req, res, next) => {
 
     next();
 };
+
+export const paramLinkValidator = [
+    param("id", "Formato no válido (expressValidator")
+        .trim()
+        .notEmpty()
+        .escape(),
+    validationResultExpress,
+];
+
+export const bodyLinkValidator = [
+    body("longLink", "formato link incorrecto").trim().notEmpty()
+        .custom(async (value) => {
+            try {
+
+                if (!value.startsWith("https://")) {
+                    value = "https://" + value;
+                };
+
+                // console.log(value);
+
+                await axios.get(value);
+                return value;
+            } catch (error) {
+                console.log(error);
+                throw new Error("not found longlin 404")
+            }
+        }),
+    validationResultExpress
+];
 
 export const bodyRegisterValidator = [
     body("email", "Formato de email incorrecto")
