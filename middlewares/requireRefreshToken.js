@@ -4,7 +4,9 @@ import jwt from "jsonwebtoken";
 export const requireRefreshToken = (req, res, next) => {
     try {
         const refreshTokenCookie = req.cookies.refreshToken;
-        if (!refreshTokenCookie) throw new Error("No existe el token");
+        if (!refreshTokenCookie)
+            // throw new Error("No existe el token"); igual que en el requireToken
+            return res.status(401).json({ error: "No existe el token" });
 
         const { uid } = jwt.verify(refreshTokenCookie, process.env.JWT_REFRESH);
 
