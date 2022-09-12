@@ -33,6 +33,8 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
+    // console.log("Entro aqui===???"); Prueba de que no entra por callback del corse
+
     try {
         const { email, password } = req.body;
 

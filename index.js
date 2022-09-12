@@ -10,6 +10,10 @@ import redirectRouter from "./routes/redirect.route.js";
 
 const app = express();
 
+// app.use(
+//     cors({ origin: [process.env.ORIGIN1] }) Se puede pasar directamente no sale la consola por que no trabajamos con json
+// );
+
 const whiteList = [process.env.ORIGIN1];
 
 app.use(
@@ -31,6 +35,7 @@ app.use(cookieParser());
 
 // Ejemplo back redirect (opcional)
 app.use("/", redirectRouter);
+
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/links", linkRouter);
 
