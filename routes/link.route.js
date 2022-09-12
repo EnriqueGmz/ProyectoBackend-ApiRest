@@ -11,7 +11,8 @@ const router = Router();
 //DELETE        /api/v1/links/:id    delete link      
 
 router.get("/", requireToken, getLinks);
-router.get("/nanoLink", getLink);
+// router.get("/:id", requireToken, getLinkCRUD); Usado con el CRUD TRADICIONAL, no require require por que son rutas publicas
+router.get("/:nanoLink", getLink);
 router.post("/", requireToken, bodyLinkValidator, createLink);
 router.delete("/:id", requireToken, paramLinkValidator, removeLink);
 router.patch("/:id", requireToken, paramLinkValidator, bodyLinkValidator, updateLink);

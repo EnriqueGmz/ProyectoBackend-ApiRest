@@ -13,6 +13,24 @@ export const getLinks = async (req, res) => {
 
 export const getLink = async (req, res) => {
     try {
+        const { nanoLink } = req.params;
+        const link = await Link.findOne({ nanoLink });
+
+        if (!link) return res.status(404).json({ error: "No existe el link" });
+
+        return res.json({ longLink: link.longLink });
+    } catch (error) {
+        console.log(error);
+        if (error.kind === "ObjectId") {
+            return res.status(403).json({ error: "Formato id incorrecto" });
+        }
+        return res.status(500).json({ error: "Error del servidor" });
+    }
+};
+
+// Para un crud tradicional no se utiliza en este programa
+export const getLinkCRUD = async (req, res) => {
+    try {
         const { id } = req.params;
         const link = await Link.findById(id);
 
@@ -30,6 +48,7 @@ export const getLink = async (req, res) => {
         return res.status(500).json({ error: "Error del servidor" });
     }
 };
+
 
 
 export const createLink = async (req, res) => {
