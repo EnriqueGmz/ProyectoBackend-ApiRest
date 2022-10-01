@@ -87,3 +87,6 @@ export const logout = (req, res) => {
     res.json({ ok: true });
 };
 
+// export {
+//     register,
+// } 
